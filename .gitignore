@@ -1,0 +1,18 @@
+# Ambientes virtuais
+venv/
+*.pyc
+*~
+__pycache__/
+
+# Banco de dados SQLite
+*.db
+*.db-journal* # Arquivos de configuração local/IDE
+.vscode/
+.idea/
+*.DS_Store
+
+# Arquivos de instância do Flask (se você usar)
+instance/
+
+# Arquivos .env (se você usar para segredos no futuro)
+.env

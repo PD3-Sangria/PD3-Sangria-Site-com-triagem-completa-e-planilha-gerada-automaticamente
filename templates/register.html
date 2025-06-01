@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+
+{% block title %}Cadastro de Usuário - Sangria Projeto{% endblock %}
+
+{% block content %}
+<div style="display: flex; justify-content: center; align-items: center; flex-direction: column;">
+    <section id="register-form-section" style="width: 100%; max-width: 500px;"> {# Um pouco mais largo para mais campos #}
+        <h2>Cadastrar Novo Usuário</h2>
+        <form method="POST" action="{{ url_for('register') }}">
+            {# Se você estivesse usando Flask-WTF, adicionaria form.csrf_token aqui #}
+            {# Ex: {{ form.csrf_token }} #}
+
+            <div class="question-group">
+                <label for="full_name">Nome Completo:</label>
+                <input type="text" id="full_name" name="full_name" class="form-control" required>
+            </div>
+
+            <div class="question-group">
+                <label for="cpf">CPF (apenas números):</label>
+                <input type="text" id="cpf" name="cpf" class="form-control" required pattern="\d{11}" title="CPF deve conter 11 números, sem pontos ou traços.">
+            </div>
+
+            <div class="question-group">
+                <label for="birth_date_user">Sua Data de Nascimento:</label>
+                <input type="date" id="birth_date_user" name="birth_date_user" class="form-control" required>
+            </div>
+
+            <div class="question-group">
+                <label for="username">Login (Usuário):</label>
+                <input type="text" id="username" name="username" class="form-control" required>
+            </div>
+
+            <div class="question-group">
+                <label for="password">Senha:</label>
+                <input type="password" id="password" name="password" class="form-control" required minlength="6" title="A senha deve ter no mínimo 6 caracteres.">
+            </div>
+
+            <div class="question-group">
+                <label for="confirm_password">Confirmar Senha:</label>
+                <input type="password" id="confirm_password" name="confirm_password" class="form-control" required minlength="6">
+            </div>
+
+            <button type="submit" class="btn btn-primary" style="width: 100%; padding: 10px; font-size: 1.1em; margin-top: 10px;">Cadastrar</button>
+        </form>
+        <p style="margin-top: 20px; text-align: center;">
+            Já tem uma conta? <a href="{{ url_for('login') }}">Faça login aqui</a>.
+        </p>
+    </section>
+</div>
+{% endblock %}
+
+{% block scripts_extra %}
+{# <script>
+    // Se houver algum JavaScript específico para a página de registro, ele iria aqui.
+    // Ex: validação de CPF em tempo real, verificação de força da senha, etc.
+    // Por enquanto, não é necessário para o funcionamento básico.
+</script> #}
+{% endblock %}

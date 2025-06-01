@@ -1,0 +1,474 @@
+/* ==========================================================================
+   Sangria Controle de Doações - CSS Aprimorado
+   ========================================================================== */
+
+/* :root define variáveis CSS globais */
+:root {
+    --cor-primaria: #d9534f; /* Vermelho principal (Sangria) */
+    --cor-primaria-hover: #c9302c;
+    --cor-primaria-active: #b92c28;
+    --cor-secundaria: #6c757d; /* Cinza para textos secundários, bordas */
+    --cor-texto-principal: #212529; /* Preto suave */
+    --cor-texto-claro: #f8f9fa;
+    --cor-fundo: #f4f6f8; /* Fundo geral ligeiramente azulado/acinzentado */
+    --cor-container-fundo: #ffffff;
+    --cor-sucesso: #28a745;
+    --cor-aviso: #ffc107;
+    --cor-erro: #dc3545;
+    --cor-borda-input: #ced4da;
+    --cor-borda-input-focus: var(--cor-primaria);
+    --sombra-padrao: 0 4px 12px rgba(0, 0, 0, 0.08);
+    --sombra-elevada: 0 8px 20px rgba(0, 0, 0, 0.1);
+    --fonte-principal: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    --fonte-titulo: 'Poppins', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    --border-radius-padrao: 8px;
+    --border-radius-pequeno: 5px;
+}
+
+/* Estilo para a barra de rolagem (Webkit/Blink browsers) */
+::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+}
+::-webkit-scrollbar-track {
+    background: var(--cor-fundo);
+    border-radius: var(--border-radius-pequeno);
+}
+::-webkit-scrollbar-thumb {
+    background: var(--cor-secundaria);
+    border-radius: var(--border-radius-pequeno);
+    transition: background 0.3s ease;
+}
+::-webkit-scrollbar-thumb:hover {
+    background: var(--cor-primaria);
+}
+
+/* Reset básico e configurações globais */
+*, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: var(--fonte-principal);
+    line-height: 1.7; /* Levemente aumentado para melhor leitura */
+    background-color: var(--cor-fundo);
+    color: var(--cor-texto-principal);
+    display: flex;
+    flex-direction: column; /* Permite que o footer (se houver) fique no final */
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px 10px; /* Adiciona padding para evitar que o container cole nas bordas */
+}
+
+.container {
+    width: 100%; /* Ocupa mais espaço em telas maiores */
+    max-width: 960px; /* Aumentado um pouco */
+    background: var(--cor-container-fundo);
+    padding: 30px 40px; /* Padding interno aumentado */
+    border-radius: var(--border-radius-padrao);
+    box-shadow: var(--sombra-elevada); /* Sombra mais pronunciada */
+    margin: 30px 0; /* Margem vertical */
+}
+
+/* ==========================================================================
+   Header
+   ========================================================================== */
+header {
+    text-align: center;
+    margin-bottom: 40px;
+    padding-bottom: 25px;
+    border-bottom: 1px solid #e0e0e0; /* Borda mais sutil */
+}
+
+header h1 {
+    font-family: var(--fonte-titulo);
+    color: var(--cor-primaria);
+    font-size: 2.8em;
+    font-weight: 700; /* Mais peso para o título */
+    letter-spacing: -0.5px; /* Espaçamento entre letras sutil */
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.05); /* Sombra de texto sutil */
+}
+
+header h2 { /* Se você tiver um subtítulo */
+    color: var(--cor-secundaria);
+    font-size: 1.2em;
+    font-weight: 400;
+    margin-top: 5px;
+}
+
+/* ==========================================================================
+   Formulário
+   ========================================================================== */
+form {
+    margin-bottom: 35px;
+}
+
+fieldset {
+    border: 1px solid #e0e0e0; /* Borda mais sutil */
+    padding: 25px 30px;
+    margin-bottom: 30px;
+    border-radius: var(--border-radius-pequeno);
+    background-color: rgba(250, 250, 250, 0.5); /* Fundo muito leve para fieldset */
+    transition: box-shadow 0.3s ease;
+}
+fieldset:hover {
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+
+legend {
+    font-family: var(--fonte-titulo);
+    font-weight: 600;
+    color: var(--cor-primaria);
+    padding: 0 12px;
+    font-size: 1.4em;
+    margin-left: 0; /* Resetado */
+}
+
+form div.question-group {
+    margin-bottom: 25px;
+    padding: 20px;
+    border-left: 5px solid transparent; /* Começa transparente */
+    border-radius: var(--border-radius-pequeno);
+    background-color: transparent;
+    transition: border-left-color 0.3s ease, background-color 0.3s ease, transform 0.2s ease;
+}
+
+form div.question-group:hover {
+    border-left-color: var(--cor-primaria);
+    background-color: #fff; /* Fundo branco no hover para destacar */
+    transform: translateX(5px); /* Leve deslocamento */
+}
+
+label {
+    display: block;
+    margin-bottom: 10px; /* Mais espaço */
+    font-weight: 500;
+    color: #333; /* Cor um pouco mais escura para labels */
+    font-size: 1.05em; /* Levemente maior */
+}
+
+label.radio-label {
+    font-weight: normal;
+    display: inline-flex; /* Para alinhar melhor com o input */
+    align-items: center; /* Alinha verticalmente */
+    margin-left: 8px;
+    margin-right: 25px;
+    color: var(--cor-texto-principal);
+    cursor: pointer; /* Indica que é clicável */
+}
+label.radio-label:hover {
+    color: var(--cor-primaria);
+}
+
+input[type="text"],
+input[type="email"],
+input[type="date"],
+input#weight,
+select {
+    width: 100%;
+    padding: 14px 18px; /* Padding mais generoso */
+    border: 1px solid var(--cor-borda-input);
+    border-radius: var(--border-radius-pequeno);
+    box-sizing: border-box;
+    font-size: 1em;
+    color: var(--cor-texto-principal);
+    background-color: #fff;
+    transition: border-color 0.25s ease, box-shadow 0.25s ease;
+}
+input[type="text"]::placeholder,
+input[type="email"]::placeholder,
+input#weight::placeholder { /* Estilo para placeholder */
+    color: #aaa;
+    font-style: italic;
+}
+
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="date"]:focus,
+input#weight:focus,
+select:focus {
+    border-color: var(--cor-borda-input-focus);
+    box-shadow: 0 0 0 3px rgba(217, 83, 79, 0.15); /* Sombra focus mais suave */
+    outline: none;
+}
+
+/* Estilizando um pouco os radio buttons (simples) */
+input[type="radio"] {
+    margin-right: 6px;
+    appearance: none; /* Remove estilo padrão */
+    -webkit-appearance: none;
+    width: 18px;
+    height: 18px;
+    border: 2px solid var(--cor-secundaria);
+    border-radius: 50%;
+    display: inline-block;
+    vertical-align: middle;
+    position: relative;
+    cursor: pointer;
+    transition: border-color 0.2s ease;
+}
+input[type="radio"]:hover {
+    border-color: var(--cor-primaria);
+}
+input[type="radio"]:checked {
+    border-color: var(--cor-primaria);
+}
+input[type="radio"]:checked::before {
+    content: '';
+    display: block;
+    width: 10px;
+    height: 10px;
+    background-color: var(--cor-primaria);
+    border-radius: 50%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+
+button,
+.button-style {
+    display: inline-block;
+    background-image: linear-gradient(to bottom, var(--cor-primaria), var(--cor-primaria-active)); /* Gradiente sutil */
+    color: var(--cor-texto-claro);
+    padding: 14px 30px; /* Mais padding */
+    border: none;
+    border-radius: var(--border-radius-pequeno);
+    cursor: pointer;
+    font-size: 1.1em;
+    font-weight: 600; /* Botões mais destacados */
+    letter-spacing: 0.3px;
+    text-align: center;
+    text-shadow: 0 1px 1px rgba(0,0,0,0.2); /* Sombra no texto do botão */
+    transition: background-image 0.3s ease, transform 0.15s ease, box-shadow 0.15s ease;
+    text-decoration: none;
+    box-shadow: var(--sombra-padrao);
+}
+
+button:hover,
+.button-style:hover {
+    background-image: linear-gradient(to bottom, var(--cor-primaria-hover), var(--cor-primaria));
+    transform: translateY(-2px); /* Efeito de elevação maior */
+    box-shadow: var(--sombra-elevada);
+}
+
+button:active,
+.button-style:active {
+    transform: translateY(0px);
+    background-image: linear-gradient(to bottom, var(--cor-primaria-active), var(--cor-primaria-hover));
+    box-shadow: inset 0 2px 4px rgba(0,0,0,0.15); /* Sombra interna ao clicar */
+}
+
+#triageResult {
+    margin-top: 25px;
+    padding: 20px; /* Mais padding */
+    border-radius: var(--border-radius-pequeno);
+    font-weight: 500;
+    font-size: 1.1em; /* Resultado mais destacado */
+    border-left-width: 6px; /* Borda mais grossa */
+    border-left-style: solid;
+    box-shadow: var(--sombra-padrao);
+}
+#triageResult ul {
+    list-style-position: inside; /* Bolinhas dentro do padding */
+    padding-left: 10px; /* Espaço para as bolinhas */
+    margin-top: 10px;
+}
+#triageResult li {
+    margin-bottom: 5px;
+}
+
+/* ==========================================================================
+   Seção de Doadores e Tabela
+   ========================================================================== */
+.donors-section {
+    margin-top: 45px;
+    padding-top: 25px;
+    border-top: 1px solid #e0e0e0;
+}
+
+.donors-section h2 {
+    font-family: var(--fonte-titulo);
+    color: var(--cor-texto-principal);
+    font-size: 2em; /* Título da seção maior */
+    margin-bottom: 25px;
+}
+
+table {
+    width: 100%;
+    border-collapse: separate; /* Permite border-radius nas células */
+    border-spacing: 0; /* Remove espaço entre células se separate */
+    margin-top: 25px;
+    box-shadow: var(--sombra-padrao);
+    border-radius: var(--border-radius-pequeno); /* Borda arredondada na tabela */
+    overflow: hidden; /* Garante que o border-radius funcione com o fundo das células */
+}
+
+th, td {
+    border-bottom: 1px solid #e0e0e0; /* Apenas borda inferior para um look mais limpo */
+    padding: 15px 18px;
+    text-align: left;
+    vertical-align: middle;
+}
+td:first-child, th:first-child { /* Padding na primeira coluna */
+    padding-left: 20px;
+}
+td:last-child, th:last-child { /* Padding na última coluna */
+    padding-right: 20px;
+}
+
+
+th {
+    background-color: #e9ecef;
+    color: #495057;
+    font-weight: 600;
+    font-size: 1.05em;
+    text-transform: uppercase; /* Cabeçalhos em maiúsculo */
+    letter-spacing: 0.5px;
+}
+
+tbody tr { /* Transição suave para o hover */
+    transition: background-color 0.2s ease;
+}
+tbody tr:nth-child(odd) {
+    background-color: rgba(248,249,250, 0.6); /* Zebrado muito sutil */
+}
+tbody tr:last-child td { /* Remove borda da última linha */
+    border-bottom: none;
+}
+
+tbody tr:hover {
+    background-color: #e6effc; /* Azul claro suave no hover */
+}
+
+/* ==========================================================================
+   Classes de Status (Cores para Alertas) - Ajustadas para as variáveis
+   ========================================================================== */
+.status-apto {
+    background-color: #d1e7dd !important;
+    color: #0f5132 !important;
+    border-left-color: var(--cor-sucesso) !important;
+    font-weight: bold;
+}
+
+.status-espera {
+    background-color: #fff3cd !important;
+    color: #664d03 !important;
+    border-left-color: var(--cor-aviso) !important;
+    font-weight: bold;
+}
+
+.status-inapto {
+    background-color: #f8d7da !important;
+    color: #58151c !important;
+    border-left-color: var(--cor-erro) !important;
+    font-weight: bold;
+}
+
+/* Aplicação das cores de status para as células da tabela TD */
+td.status-apto,
+td.status-espera,
+td.status-inapto {
+    text-align: center;
+    font-weight: bold;
+    border-radius: var(--border-radius-pequeno); /* Bordas arredondadas para os status na tabela */
+    padding: 10px 12px; /* Padding específico para células de status */
+}
+/* Para dar cor de fundo à célula inteira do status na tabela, mantendo o texto */
+td.status-apto { background-color: #d1e7dd !important; color: #0f5132 !important; }
+td.status-espera { background-color: #fff3cd !important; color: #664d03 !important; }
+td.status-inapto { background-color: #f8d7da !important; color: #58151c !important; }
+
+
+/* ==========================================================================
+   Responsividade (Ajustes adicionais)
+   ========================================================================== */
+@media (max-width: 992px) { /* Telas médias */
+    .container {
+        padding: 25px 30px;
+    }
+    header h1 { font-size: 2.4em; }
+    .donors-section h2 { font-size: 1.8em; }
+}
+
+@media (max-width: 768px) {
+    .container {
+        width: 100%; /* Ocupa toda a largura em telas menores */
+        margin: 15px 0;
+        padding: 20px 20px; /* Menos padding horizontal */
+        border-radius: 0; /* Remove bordas arredondadas para sensação de tela cheia */
+        box-shadow: none; /* Remove sombra em telas pequenas */
+    }
+
+    body { padding: 0; } /* Remove padding do body em telas pequenas */
+
+    header h1 {
+        font-size: 2em;
+    }
+    header h2 {
+        font-size: 1em;
+    }
+    legend {
+        font-size: 1.2em;
+    }
+    button, .button-style {
+        padding: 12px 22px;
+        font-size: 1em;
+        width: 100%; /* Botões ocupam largura total para melhor toque */
+        margin-bottom: 10px;
+    }
+    button:last-of-type { margin-bottom: 0; }
+
+    input[type="text"],
+    input[type="email"],
+    input[type="date"],
+    input#weight,
+    select {
+        padding: 12px 15px;
+    }
+
+    .donors-section {
+        overflow-x: auto; /* Mantém rolagem horizontal para tabela */
+    }
+    table {
+        min-width: 650px; /* Aumentado um pouco para garantir que o conteúdo não seja esmagado */
+    }
+    th, td {
+        padding: 12px 10px; /* Menos padding nas células */
+        font-size: 0.95em; /* Fonte ligeiramente menor na tabela */
+    }
+    td.status-apto, td.status-espera, td.status-inapto {
+        padding: 8px 10px;
+    }
+}
+
+@media (max-width: 480px) {
+    .container { padding: 15px; }
+    header h1 { font-size: 1.7em; }
+    form div.question-group {
+        padding: 15px 10px;
+        transform: none; /* Remove translação em telas muito pequenas */
+    }
+    form div.question-group:hover {
+        transform: none;
+    }
+
+    label.radio-label {
+        margin-right: 10px;
+        display: flex; /* Força alinhamento se quebrar linha */
+        margin-bottom: 8px; /* Espaço se quebrar linha */
+    }
+    input[type="radio"] {
+       margin-bottom: 5px; /* Espaço abaixo do radio se o label quebrar */
+    }
+
+    #triageResult {
+        font-size: 1em;
+        padding: 15px;
+    }
+    .donors-section h2 { font-size: 1.6em; }
+    table { min-width: 500px; }
+}

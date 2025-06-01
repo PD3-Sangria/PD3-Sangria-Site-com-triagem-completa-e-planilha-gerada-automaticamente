@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+
+{% block title %}Login - Sangria Projeto{% endblock %}
+
+{% block content %}
+<div style="display: flex; justify-content: center; align-items: center; flex-direction: column;">
+    {# O container principal já é fornecido pelo base.html, mas podemos adicionar um wrapper se quisermos centralizar mais #}
+    {# No entanto, o .container do base.html já centraliza. Vamos apenas adicionar o conteúdo do formulário #}
+
+    <section id="login-form-section" style="width: 100%; max-width: 400px;">
+        <h2>Login no Sistema</h2>
+        <form method="POST" action="{{ url_for('login') }}">
+            {# Se você estivesse usando Flask-WTF, adicionaria form.csrf_token aqui #}
+            {# Ex: {{ form.csrf_token }} #}
+
+            <div class="question-group">
+                <label for="username">Login (Usuário):</label>
+                <input type="text" id="username" name="username" class="form-control" required autofocus>
+            </div>
+
+            <div class="question-group">
+                <label for="password">Senha:</label>
+                <input type="password" id="password" name="password" class="form-control" required>
+            </div>
+
+            <button type="submit" class="btn btn-primary" style="width: 100%; padding: 10px; font-size: 1.1em; margin-top: 10px;">Entrar</button>
+        </form>
+        <p style="margin-top: 20px; text-align: center;">
+            Não tem uma conta? <a href="{{ url_for('register') }}">Cadastre-se aqui</a>.
+        </p>
+    </section>
+</div>
+{% endblock %}
+
+{% block scripts_extra %}
+{# <script>
+    // Se houver algum JavaScript específico para a página de login, ele iria aqui.
+    // Por enquanto, não é necessário para um formulário simples.
+</script> #}
+{% endblock %}

@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Sangria - Controle de Doações{% endblock %}</title>
+    <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='favicon.ico') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='Sangria.css') }}">
+    
+    {# Estilos inline básicos para garantir funcionamento visual mínimo #}
+    {# Ideal mover o máximo possível para Sangria.css mas to com preguiça css e chato para um car#@$@#055160 #}
+    <style>
+        body { 
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; 
+            line-height: 1.6; 
+            margin: 0; 
+            padding: 0; 
+            background-color: #f4f6f8; /* Cor de fundo do app.py aprimorado */
+            color: #212529; 
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        .navbar { 
+            background-color: #c0392b; /* Cor primária original, pode ser mudada no Sangria.css */
+            padding: 12px 25px; 
+            color: white; 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .navbar .brand a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1.3em;
+        }
+        .navbar .nav-links a { 
+            color: white; 
+            text-decoration: none; 
+            margin-left: 18px; 
+            font-size: 1em;
+        }
+        .navbar .nav-links a:hover { 
+            text-decoration: underline; 
+        }
+        .navbar .user-info {
+            color: #f0f0f0; 
+            margin-right: 15px;
+        }
+        .container { 
+            flex: 1; 
+            width: 90%;
+            max-width: 960px; 
+            margin: 30px auto; 
+            background: #ffffff; 
+            padding: 25px 35px; 
+            border-radius: 12px; 
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1); 
+        }
+        .flash-messages { 
+            list-style: none; 
+            padding: 0; 
+            margin: 0 0 20px 0; 
+        }
+        .flash-messages li { 
+            padding: 12px 18px; 
+            margin-bottom: 12px; 
+            border-radius: 6px; 
+            border-left-width: 5px;
+            border-left-style: solid;
+            font-weight: 500;
+        }
+        
+        .flash-messages .success { 
+            background-color: #d1e7dd; color: #0f5132; border-left-color: #28a745; 
+        }
+        .flash-messages .error { 
+            background-color: #f8d7da; color: #58151c; border-left-color: #dc3545; 
+        }
+        .flash-messages .info { 
+            background-color: #cff4fc; color: #055160; border-left-color: #0dcaf0;
+        }
+        .flash-messages .warning { 
+            background-color: #fff3cd; color: #664d03; border-left-color: #ffc107;
+        }
+
+        
+        .question-group { margin-bottom: 15px; }
+        label { display: block; margin-bottom: 5px; font-weight: bold; color: #495057;}
+        input[type="text"],
+        input[type="email"],
+        input[type="date"],
+        input[type="password"],
+        select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ced4da;
+            border-radius: 4px;
+            box-sizing: border-box;
+            font-size: 1em;
+        }
+        input[type="text"]:focus,
+        input[type="email"]:focus,
+        input[type="date"]:focus,
+        input[type="password"]:focus,
+        select:focus {
+            border-color: #c0392b; /* Cor de destaque */
+            box-shadow: 0 0 0 0.2rem rgba(192, 57, 43, 0.25);
+            outline: none;
+        }
+        button[type="submit"], .button-style {
+            display: inline-block;
+            background-color: #c0392b;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 1em;
+            font-weight: 500;
+            text-align: center;
+            transition: background-color 0.2s ease;
+        }
+        button[type="submit"]:hover, .button-style:hover {
+            background-color: #a93226;
+        }
+    </style>
+
+    {# Bloco para CSS ou meta tags específicas de cada página filha #}
+    {% block head_extra %}{% endblock %}
+</head>
+<body>
+    <nav class="navbar">
+        <div class="brand">
+            <a href="{{ url_for('index') }}">🩸 Sangria Projeto</a>
+        </div>
+        <div class="nav-links">
+            {% if current_user.is_authenticated %}
+                <span class="user-info">Olá, {{ current_user.full_name or current_user.username }}!</span>
+                <a href="{{ url_for('logout') }}">Sair (Logout)</a>
+            {% else %}
+                <a href="{{ url_for('login') }}">Login</a>
+                <a href="{{ url_for('register') }}">Cadastrar</a>
+            {% endif %}
+        </div>
+    </nav>
+
+    <main class="container">
+        {# Seção para exibir mensagens flash (ex: "Login realizado com sucesso!") #}
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                <ul class="flash-messages">
+                {% for category, message in messages %}
+                    <li class="{{ category }}">{{ message }}</li>
+                {% endfor %}
+                </ul>
+            {% endif %}
+        {% endwith %}
+
+        {# Bloco onde o conteúdo específico de cada página filha será inserido #}
+        {% block content %}{% endblock %}
+    </main>
+    
+    {# Rodapé simples (opcional) #}
+    <footer style="text-align: center; padding: 20px 0; color: #6c757d; font-size: 0.9em; border-top: 1px solid #e9ecef; margin-top: auto;">
+        <p>&copy; 2025 Sangria Projeto - Controle de Doações. Todos os direitos reservados.</p> 
+{# Você pode colocar o ano atual aqui manualmente #}
+    </footer>
+
+    {# Bloco para scripts JavaScript específicos de cada página filha #}
+    {% block scripts_extra %}{% endblock %}
+</body>
+</html>

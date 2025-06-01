@@ -1,0 +1,5 @@
+Flask>=2.0
+openpyxl>=3.0
+Flask-Login>=0.5 
+Werkzeug>=2.0 
+# gunicorn 

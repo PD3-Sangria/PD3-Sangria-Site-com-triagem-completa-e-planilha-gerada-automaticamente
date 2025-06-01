@@ -1,0 +1,398 @@
+{% extends "base.html" %}
+
+{% block title %}Painel de Doações - Sangria Projeto{% endblock %}
+
+{% block head_extra %}
+    {# Seus estilos específicos para esta página, se houver #}
+{% endblock %}
+
+{% block content %}
+    {# ... (sua seção id="donor-form-section" com o formulário de cadastro de doador permanece igual) ... #}
+    <section id="donor-form-section">
+        <h2>Cadastro e Triagem de Doador</h2>
+        <form id="donorForm">
+            {# SEU FORMULÁRIO DE CADASTRO DE DOADOR COMPLETO VAI AQUI #}
+            {# ... (fieldset de Informações Pessoais do Doador) ... #}
+            {# ... (fieldset do Questionário de Triagem Detalhado) ... #}
+            <fieldset>
+                <legend>Informações Pessoais do Doador</legend>
+                <div class="question-group">
+                    <label for="donorName">Nome Completo:</label>
+                    <input type="text" id="donorName" name="donorName" required>
+                </div>
+                <div class="question-group">
+                    <label for="birthDate">Data de Nascimento (Doador):</label>
+                    <input type="date" id="birthDate" name="birthDate" required>
+                </div>
+                <div class="question-group">
+                    <label for="bloodType">Tipo Sanguíneo:</label>
+                    <select id="bloodType" name="bloodType" required>
+                        <option value="">Selecione...</option>
+                        <option value="A+">A+</option>
+                        <option value="A-">A-</option>
+                        <option value="B+">B+</option>
+                        <option value="B-">B-</option>
+                        <option value="AB+">AB+</option>
+                        <option value="AB-">AB-</option>
+                        <option value="O+">O+</option>
+                        <option value="O-">O-</option>
+                    </select>
+                </div>
+                <div class="question-group">
+                    <label for="lastDonationDate">Data da Última Doação (se houver):</label>
+                    <input type="date" id="lastDonationDate" name="lastDonationDate">
+                </div>
+                <div class="question-group">
+                    <label for="contactInfo">Email ou Telefone do Doador (Opcional):</label>
+                    <input type="text" id="contactInfo" name="contactInfo">
+                </div>
+            </fieldset>
+
+            <fieldset>
+                <legend>Questionário de Triagem Detalhado</legend>
+                <p>Responda com atenção. Sua sinceridade é fundamental para a segurança transfusional.</p>
+                {# ... COLOQUE AQUI TODAS AS SUAS 19 PERGUNTAS DE TRIAGEM ... #}
+                {# Exemplo da primeira pergunta de triagem: #}
+                <div class="question-group">
+                    <label>1. Qual seu peso atual? (mínimo 50kg)</label>
+                    <input type="text" id="weight" name="weight" placeholder="Ex: 65.5">
+                </div>
+                {# ... (continue com as outras perguntas de triagem aqui) ... #}
+                 <div class="question-group">
+                    <label>2. Você está bem de saúde hoje?</label>
+                    <input type="radio" id="healthGoodYes" name="healthGood" value="yes" required> <label class="radio-label" for="healthGoodYes">Sim</label>
+                    <input type="radio" id="healthGoodNo" name="healthGood" value="no"> <label class="radio-label" for="healthGoodNo">Não</label>
+                </div>
+                <div class="question-group">
+                    <label>3. Teve febre, gripe ou resfriado nos últimos 7 dias?</label>
+                    <input type="radio" id="feverFluYes" name="feverFlu" value="yes" required> <label class="radio-label" for="feverFluYes">Sim</label>
+                    <input type="radio" id="feverFluNo" name="feverFlu" value="no"> <label class="radio-label" for="feverFluNo">Não</label>
+                </div>
+                <div class="question-group">
+                    <label>4. Teve diarreia nos últimos 7 dias?</label>
+                    <input type="radio" id="diarrheaYes" name="diarrhea" value="yes" required> <label class="radio-label" for="diarrheaYes">Sim</label>
+                    <input type="radio" id="diarrheaNo" name="diarrhea" value="no"> <label class="radio-label" for="diarrheaNo">Não</label>
+                </div>
+                <div class="question-group">
+                    <label>5. Já teve diagnóstico de Hepatite após os 11 anos de idade?</label>
+                    <input type="radio" id="hepatitisYes" name="hepatitis" value="yes" required> <label class="radio-label" for="hepatitisYes">Sim</label>
+                    <input type="radio" id="hepatitisNo" name="hepatitis" value="no"> <label class="radio-label" for="hepatitisNo">Não</label>
+                </div>
+                <div class="question-group">
+                    <label>6. Já teve malária, doença de Chagas ou esteve em área de risco para essas doenças?</label>
+                    <input type="radio" id="malariaChagasYes" name="malariaChagas" value="yes" required> <label class="radio-label" for="malariaChagasYes">Sim</label>
+                    <input type="radio" id="malariaChagasNo" name="malariaChagas" value="no"> <label class="radio-label" for="malariaChagasNo">Não</label>
+                </div>
+                 <div class="question-group">
+                    <label>7. Alguma vez teste positivo para HIV (AIDS), HTLV, Sífilis ou Hepatite B/C?</label>
+                    <input type="radio" id="stdPositiveYes" name="stdPositive" value="yes" required> <label class="radio-label" for="stdPositiveYes">Sim</label>
+                    <input type="radio" id="stdPositiveNo" name="stdPositive" value="no"> <label class="radio-label" for="stdPositiveNo">Não</label>
+                </div>
+                <div class="question-group">
+                    <label>8. Você tem ou teve câncer (inclusive leucemia ou linfoma)?</label>
+                    <input type="radio" id="cancerYes" name="cancer" value="yes" required> <label class="radio-label" for="cancerYes">Sim</label>
+                    <input type="radio" id="cancerNo" name="cancer" value="no"> <label class="radio-label" for="cancerNo">Não</label>
+                </div>
+                 <div class="question-group">
+                    <label>9. Tem alguma doença que o obrigue a tomar medicação continuamente (ex: diabetes com insulina, doenças autoimunes graves, epilepsia com crises nos últimos 12 meses)?</label>
+                    <input type="radio" id="continuousMedicationYes" name="continuousMedication" value="yes" required> <label class="radio-label" for="continuousMedicationYes">Sim</label>
+                    <input type="radio" id="continuousMedicationNo" name="continuousMedication" value="no"> <label class="radio-label" for="continuousMedicationNo">Não</label>
+                </div>
+                <div class="question-group">
+                    <label>10. Fez tatuagem, maquiagem definitiva ou piercing (se não em local estéril ou mucosa) nos últimos 6-12 meses? (Consulte o prazo específico do hemocentro)</label>
+                    <input type="radio" id="tattooPiercingYes" name="tattooPiercing" value="yes" required> <label class="radio-label" for="tattooPiercingYes">Sim</label>
+                    <input type="radio" id="tattooPiercingNo" name="tattooPiercing" value="no"> <label class="radio-label" for="tattooPiercingNo">Não</label>
+                </div>
+                <div class="question-group">
+                    <label>11. Passou por alguma cirurgia ou procedimento endoscópico (endoscopia, colonoscopia) nos últimos 6 meses?</label>
+                    <input type="radio" id="surgeryEndoscopyYes" name="surgeryEndoscopy" value="yes" required> <label class="radio-label" for="surgeryEndoscopyYes">Sim</label>
+                    <input type="radio" id="surgeryEndoscopyNo" name="surgeryEndoscopy" value="no"> <label class="radio-label" for="surgeryEndoscopyNo">Não</label>
+                </div>
+                <div class="question-group">
+                    <label>12. Recebeu transfusão de sangue ou hemoderivados nos últimos 12 meses?</label>
+                    <input type="radio" id="transfusionYes" name="transfusion" value="yes" required> <label class="radio-label" for="transfusionYes">Sim</label>
+                    <input type="radio" id="transfusionNo" name="transfusion" value="no"> <label class="radio-label" for="transfusionNo">Não</label>
+                </div>
+                <div class="question-group">
+                    <label>13. Fez uso de drogas injetáveis ilícitas alguma vez na vida?</label>
+                    <input type="radio" id="injectedDrugsYes" name="injectedDrugs" value="yes" required> <label class="radio-label" for="injectedDrugsYes">Sim</label>
+                    <input type="radio" id="injectedDrugsNo" name="injectedDrugs" value="no"> <label class="radio-label" for="injectedDrugsNo">Não</label>
+                </div>
+                <div class="question-group">
+                    <label>14. Você teve relação sexual com pessoa que tem ou teve teste positivo para HIV, Hepatite B/C ou usou drogas injetáveis nos últimos 12 meses?</label>
+                    <input type="radio" id="riskyPartnerYes" name="riskyPartner" value="yes" required> <label class="radio-label" for="riskyPartnerYes">Sim</label>
+                    <input type="radio" id="riskyPartnerNo" name="riskyPartner" value="no"> <label class="radio-label" for="riskyPartnerNo">Não</label>
+                </div>
+                <div class="question-group">
+                    <label>15. Teve relação sexual com múltiplos(as) parceiros(as) nos últimos 12 meses sem uso de preservativo?</label>
+                    <input type="radio" id="multiplePartnersYes" name="multiplePartners" value="yes" required> <label class="radio-label" for="multiplePartnersYes">Sim</label>
+                    <input type="radio" id="multiplePartnersNo" name="multiplePartners" value="no"> <label class="radio-label" for="multiplePartnersNo">Não</label>
+                </div>
+                <div class="question-group">
+                    <label>16. Esteve em algum país com surto de doenças transmissíveis por sangue (ex: Malária, Febre Amarela, Zika) nos últimos 30 dias a 12 meses (dependendo do local)?</label>
+                    <input type="radio" id="travelRiskYes" name="travelRisk" value="yes" required> <label class="radio-label" for="travelRiskYes">Sim</label>
+                    <input type="radio" id="travelRiskNo" name="travelRisk" value="no"> <label class="radio-label" for="travelRiskNo">Não</label>
+                </div>
+                <div class="question-group">
+                    <label>17. Tomou alguma vacina recentemente (ex: febre amarela, sarampo, gripe)? Especifique qual e quando, se sim.</label>
+                    <input type="radio" id="vaccineRecentYes" name="vaccineRecent" value="yes" required> <label class="radio-label" for="vaccineRecentYes">Sim</label>
+                    <input type="radio" id="vaccineRecentNo" name="vaccineRecent" value="no"> <label class="radio-label" for="vaccineRecentNo">Não</label>
+                    <input type="text" id="vaccineDetails" name="vaccineDetails" placeholder="Se sim, qual vacina e quando?" style="margin-top:5px; display:none;">
+                </div>
+                <div class="question-group">
+                    <label>18. (Para mulheres) Está grávida ou amamentando (bebê com menos de 12 meses)?</label>
+                    <input type="radio" id="pregnantBreastfeedingYes" name="pregnantBreastfeeding" value="yes"> <label class="radio-label" for="pregnantBreastfeedingYes">Sim</label>
+                    <input type="radio" id="pregnantBreastfeedingNo" name="pregnantBreastfeeding" value="no"> <label class="radio-label" for="pregnantBreastfeedingNo">Não</label>
+                    <input type="radio" id="pregnantBreastfeedingNA" name="pregnantBreastfeeding" value="na" checked> <label class="radio-label" for="pregnantBreastfeedingNA">Não se aplica / Não responder</label>
+                </div>
+                 <div class="question-group">
+                    <label>19. (Para mulheres) Teve parto ou aborto nos últimos 3 meses?</label>
+                    <input type="radio" id="parturitionYes" name="parturition" value="yes"> <label class="radio-label" for="parturitionYes">Sim</label>
+                    <input type="radio" id="parturitionNo" name="parturition" value="no"> <label class="radio-label" for="parturitionNo">Não</label>
+                    <input type="radio" id="parturitionNA" name="parturition" value="na" checked> <label class="radio-label" for="parturitionNA">Não se aplica / Não responder</label>
+                </div>
+
+            </fieldset>
+            <button type="submit">Verificar Elegibilidade e Cadastrar Doador</button>
+        </form>
+        <div id="triageResult">
+            </div>
+    </section>
+
+    {# --- MODIFICAÇÃO AQUI --- #}
+    {% if current_user.is_authenticated and current_user.is_admin %}
+        <section class="donors-section">
+            <h2>Doadores Cadastrados</h2>
+            <button id="generateSheetButton" style="margin-bottom: 15px;">Gerar Planilha</button>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Nome</th>
+                        <th>Tipo Sanguíneo</th>
+                        <th>Última Doação</th>
+                        <th>Próxima Doação Autorizada</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody id="donorsTableBody">
+                    {# As linhas serão preenchidas por JavaScript #}
+                </tbody>
+            </table>
+        </section>
+    {% endif %}
+    {# --- FIM DA MODIFICAÇÃO --- #}
+
+{% endblock %}
+
+{% block scripts_extra %}
+    <script>
+        // Script para mostrar/ocultar detalhes da vacina
+        const vaccineRecentYes = document.getElementById('vaccineRecentYes');
+        const vaccineRecentNo = document.getElementById('vaccineRecentNo');
+        const vaccineDetailsInput = document.getElementById('vaccineDetails');
+
+        if (vaccineRecentYes && vaccineRecentNo && vaccineDetailsInput) {
+            function toggleVaccineDetails() {
+                if (vaccineRecentYes.checked) {
+                    vaccineDetailsInput.style.display = 'block';
+                    vaccineDetailsInput.required = true; 
+                } else {
+                    vaccineDetailsInput.style.display = 'none';
+                    vaccineDetailsInput.required = false;
+                    vaccineDetailsInput.value = ''; 
+                }
+            }
+            vaccineRecentYes.addEventListener('change', toggleVaccineDetails);
+            vaccineRecentNo.addEventListener('change', toggleVaccineDetails);
+            // A chamada inicial toggleVaccineDetails() está no window.onload
+        }
+
+        // Event listener para o formulário de doador (seu script completo existente)
+        document.getElementById('donorForm').addEventListener('submit', function(event) {
+            event.preventDefault(); 
+            const resultDiv = document.getElementById('triageResult');
+            resultDiv.innerHTML = 'Processando e enviando para o servidor...';
+            resultDiv.className = ''; 
+
+            const formData = {
+                donorName: document.getElementById('donorName').value,
+                birthDate: document.getElementById('birthDate').value,
+                weight: document.getElementById('weight').value,
+                bloodType: document.getElementById('bloodType').value,
+                lastDonationDate: document.getElementById('lastDonationDate').value || null,
+                contactInfo: document.getElementById('contactInfo') ? document.getElementById('contactInfo').value : null,
+
+                healthGood: document.querySelector('input[name="healthGood"]:checked')?.value,
+                feverFlu: document.querySelector('input[name="feverFlu"]:checked')?.value,
+                diarrhea: document.querySelector('input[name="diarrhea"]:checked')?.value,
+                hepatitis: document.querySelector('input[name="hepatitis"]:checked')?.value,
+                malariaChagas: document.querySelector('input[name="malariaChagas"]:checked')?.value,
+                stdPositive: document.querySelector('input[name="stdPositive"]:checked')?.value,
+                cancer: document.querySelector('input[name="cancer"]:checked')?.value,
+                continuousMedication: document.querySelector('input[name="continuousMedication"]:checked')?.value,
+                tattooPiercing: document.querySelector('input[name="tattooPiercing"]:checked')?.value,
+                surgeryEndoscopy: document.querySelector('input[name="surgeryEndoscopy"]:checked')?.value,
+                transfusion: document.querySelector('input[name="transfusion"]:checked')?.value,
+                injectedDrugs: document.querySelector('input[name="injectedDrugs"]:checked')?.value,
+                riskyPartner: document.querySelector('input[name="riskyPartner"]:checked')?.value,
+                multiplePartners: document.querySelector('input[name="multiplePartners"]:checked')?.value,
+                travelRisk: document.querySelector('input[name="travelRisk"]:checked')?.value,
+                vaccineRecent: document.querySelector('input[name="vaccineRecent"]:checked')?.value,
+                vaccineDetails: vaccineDetailsInput ? vaccineDetailsInput.value : '',
+                pregnantBreastfeeding: document.querySelector('input[name="pregnantBreastfeeding"]:checked')?.value,
+                parturition: document.querySelector('input[name="parturition"]:checked')?.value
+            };
+
+            fetch('/api/donors', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(formData),
+            })
+            .then(response => {
+                if (!response.ok) { 
+                    return response.json().then(errData => { 
+                        throw new Error(errData.error || `Erro HTTP: ${response.status}`);
+                    }).catch(() => { 
+                        throw new Error(`Erro HTTP: ${response.status}`);
+                    });
+                }
+                return response.json();
+            })
+            .then(data => {
+                if (typeof data !== 'object' || data === null) { 
+                     throw new Error("Resposta inválida do servidor.");
+                }
+
+                if (data.error) { 
+                    resultDiv.innerHTML = `<strong style="color: red;">Erro: ${data.error} ${data.details || ''}</strong>`;
+                    resultDiv.className = 'status-inapto';
+                } else {
+                    let message = `<strong>${data.triage_message}</strong><br>`;
+                    message += `Status da Triagem: ${data.triage_status.replace(/_/g, ' ')}<br>`;
+                    if(data.deferral_days && data.deferral_days > 0) {
+                        message += `Dias de inaptidão: ${data.deferral_days}<br>`;
+                    }
+                    if(data.calculated_next_donation_date) {
+                        const nextDate = new Date(data.calculated_next_donation_date + 'T00:00:00Z'); 
+                        message += `Próxima data possível para doação/liberação: ${nextDate.toLocaleDateString('pt-BR', { timeZone: 'America/Sao_Paulo' })}<br>`;
+                    }
+                    resultDiv.innerHTML = message;
+
+                    if (data.triage_status.includes('apto')) {
+                        resultDiv.className = 'status-apto';
+                    } else if (data.triage_status.includes('inapto_temporario')) {
+                        resultDiv.className = 'status-espera';
+                    } else {
+                        resultDiv.className = 'status-inapto';
+                    }
+                    document.getElementById('donorForm').reset(); 
+                    if (vaccineDetailsInput) vaccineDetailsInput.style.display = 'none'; 
+                    loadDonors(); 
+                }
+            })
+            .catch((error) => {
+                console.error('Error no fetch:', error); 
+                resultDiv.innerHTML = `<strong style="color: red;">Ocorreu um erro de comunicação ou processamento: ${error.message}</strong>`;
+                resultDiv.className = 'status-inapto';
+            });
+        });
+
+        function loadDonors() {
+            fetch('/api/donors')
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error(`Erro HTTP ao carregar doadores: ${response.status}`);
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    const tableBody = document.getElementById('donorsTableBody');
+                    // Só tenta manipular tableBody se a seção de doadores estiver visível (ou seja, se o usuário é admin)
+                    // Se não for admin, a section "donors-section" não existe, então tableBody também não existirá.
+                    if (!tableBody) { 
+                        // console.log("Tabela de doadores não visível para este usuário.");
+                        return; 
+                    }
+
+                    tableBody.innerHTML = ''; 
+                    if (!data || data.length === 0) {
+                        const row = tableBody.insertRow();
+                        const cell = row.insertCell();
+                        cell.colSpan = 5; 
+                        cell.textContent = 'Nenhum doador cadastrado ainda.';
+                        cell.style.textAlign = 'center';
+                        return;
+                    }
+
+                    data.forEach(donor => {
+                        const row = tableBody.insertRow();
+                        row.insertCell().textContent = donor.name;
+                        row.insertCell().textContent = donor.blood_type;
+
+                        let lastDateDisplay = '-';
+                        if (donor.last_donation_date) {
+                            const lastD = new Date(donor.last_donation_date + 'T00:00:00Z'); 
+                            lastDateDisplay = lastD.toLocaleDateString('pt-BR', { timeZone: 'America/Sao_Paulo' });
+                        }
+                        row.insertCell().textContent = lastDateDisplay;
+
+                        let nextDateDisplay = '-';
+                        if (donor.calculated_next_donation_date) {
+                            const nextD = new Date( donor.calculated_next_donation_date + 'T00:00:00Z');
+                            nextDateDisplay = nextD.toLocaleDateString('pt-BR', { timeZone: 'America/Sao_Paulo' });
+                        }
+                        row.insertCell().textContent = nextDateDisplay;
+
+                        const statusCell = row.insertCell();
+                        let displayStatusText = (donor.display_status || donor.triage_result_status || 'N/A').replace(/_/g, ' ');
+                        statusCell.textContent = displayStatusText;
+                        
+                        let statusForClass = (donor.display_status || donor.triage_result_status || '').toLowerCase();
+
+                        if (statusForClass.includes('apto')) {
+                            statusCell.className = 'status-apto';
+                        } else if (statusForClass.includes('espera') || statusForClass.includes('aguardando')) {
+                            statusCell.className = 'status-espera';
+                        } else if (statusForClass.includes('inapto')) { 
+                            statusCell.className = 'status-inapto';
+                        } else {
+                            statusCell.className = ''; 
+                        }
+                    });
+                })
+                .catch(error => {
+                    console.error('Erro ao carregar doadores:', error);
+                    const tableBody = document.getElementById('donorsTableBody');
+                    if(tableBody){ 
+                        tableBody.innerHTML = '';
+                        const row = tableBody.insertRow();
+                        const cell = row.insertCell();
+                        cell.colSpan = 5; 
+                        cell.textContent = `Erro ao carregar dados dos doadores: ${error.message}`;
+                        cell.style.textAlign = 'center';
+                        cell.style.color = 'red';
+                    }
+                });
+        }
+
+        const generateSheetButton = document.getElementById('generateSheetButton');
+        // O event listener só será adicionado se o botão existir (ou seja, se for admin)
+        if (generateSheetButton) { 
+            generateSheetButton.addEventListener('click', function() {
+                window.location.href = '/api/donors/spreadsheet'; 
+            });
+        }
+
+        window.onload = function() {
+            // A função loadDonors() tentará popular a tabela. Se o usuário não for admin,
+            // o tableBody não existirá e a função retornará cedo.
+            loadDonors(); 
+            
+            if (vaccineRecentYes && vaccineRecentNo && vaccineDetailsInput) {
+                 toggleVaccineDetails();
+            }
+        };
+    </script>
+{% endblock %}
