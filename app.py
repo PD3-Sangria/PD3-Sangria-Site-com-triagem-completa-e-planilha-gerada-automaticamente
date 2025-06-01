@@ -13,10 +13,14 @@ from flask_login import (
 import openpyxl
 from openpyxl.styles import PatternFill, Font, Alignment
 from openpyxl.utils import get_column_letter
+import os # Adicionado para o caminho do banco de dados (se não estava antes)
 
 # --- Configuração da Aplicação Flask ---
 app = Flask(__name__)
-app.config['DATABASE'] = 'sangria_doadores.db'
+
+# Caminho absoluto para o banco de dados
+project_root = os.path.dirname(os.path.abspath(__file__))
+app.config['DATABASE'] = os.path.join(project_root, 'sangria_doadores.db')
 app.config['SECRET_KEY'] = 'uma_chave_secreta_muito_segura_e_dificil_de_adivinhar_123!@#' # Mantenha uma chave forte!
 
 # --- Configuração do Flask-Login ---
@@ -58,7 +62,7 @@ def load_user(user_id):
 def get_db():
     if 'db' not in g:
         g.db = sqlite3.connect(
-            app.config['DATABASE'],
+            app.config['DATABASE'], # Já usa o caminho absoluto configurado acima
             detect_types=sqlite3.PARSE_DECLTYPES
         )
         g.db.row_factory = sqlite3.Row
@@ -369,13 +373,14 @@ def generate_spreadsheet():
     sheet = wb.active
     sheet.title = "Controle de Doações Sangria"
 
-    # MODIFICADO: Adicionado "Email/Telefone"
+    # --- INÍCIO DAS MODIFICAÇÕES PARA ADICIONAR contact_info ---
     headers = [
         "ID", "Nome", "Data Nasc.", "Peso (kg)", "Tipo Sanguíneo", 
-        "Email/Telefone", # << NOVO CABEÇALHO
+        "Email/Telefone", # << NOVO CABEÇALHO ADICIONADO
         "Última Doação", "Status Triagem", "Dias Inapto", "Mensagem Triagem", 
         "Próxima Data Possível", "Data Cadastro"
     ]
+    # --- FIM DAS MODIFICAÇÕES PARA ADICIONAR contact_info ---
     sheet.append(headers)
 
     fill_apto = PatternFill(start_color="C6EFCE", end_color="C6EFCE", fill_type="solid")
@@ -435,24 +440,24 @@ def generate_spreadsheet():
         # Lógica de status_cell_idx e alinhamento precisa ser robusta à nova coluna
         try:
             status_cell_idx = headers.index("Status Triagem") + 1
-            # ADICIONADO: Índice para a nova coluna de contato para alinhamento
+            # ADICIONADO: Índice para a nova coluna de contato para alinhamento (ou certifique-se que a lógica de alinhamento abaixo lida com isso)
             contact_cell_idx = headers.index("Email/Telefone") + 1 
         except ValueError: 
             status_cell_idx = -1 
-            contact_cell_idx = -1
+            contact_cell_idx = -1 # Se o header não for encontrado, não tentaremos alinhar
             
         status_val = (donor['triage_result_status'] or "").lower() 
         
         current_row = sheet.max_row
         for col_idx in range(1, len(headers) + 1):
             cell = sheet.cell(row=current_row, column=col_idx)
-            # MODIFICADO: Lógica de alinhamento para incluir a coluna de contato
-            if col_idx == contact_cell_idx:
-                 cell.alignment = alignment_left
-            elif col_idx not in [headers.index("ID")+1, headers.index("Peso (kg)")+1, (headers.index("Dias Inapto")+1 if "Dias Inapto" in headers else -1)]:
-                 cell.alignment = alignment_left
-            else: 
+            # Lógica de alinhamento MODIFICADA para incluir a nova coluna de contato
+            # As colunas que queremos centralizadas: ID, Peso (kg), Dias Inapto
+            # As outras (Nome, Data Nasc., Tipo Sanguíneo, Email/Telefone, Última Doação, Status, Mensagem, Próxima Data, Data Cadastro) à esquerda
+            if headers[col_idx-1] in ["ID", "Peso (kg)", "Dias Inapto"]:
                  cell.alignment = alignment_center
+            else:
+                 cell.alignment = alignment_left
 
             if status_cell_idx > 0 and col_idx == status_cell_idx: 
                 if "apto" in status_val:
